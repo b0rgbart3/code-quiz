@@ -63,12 +63,15 @@ var displayQuestion = function(question) {
 
     question.options.forEach( function(option, index) {
         questionButtons[index] = document.createElement('button');
+        questionButtons[index].textContent = option;
         optionsDiv.appendChild(questionButtons[index]);
+       // give the user 5 seconds to answer before moving on to next question
+
     });
     
     
-    // give the user 5 seconds to answer before moving on to next question
 
+  
 }
 
 var delay = [1,1,15,15,15,15,5,5,5,5,5,5,5,5,5];
@@ -89,7 +92,7 @@ var startQuiz = function() {
             console.log('about to clear the timer');
             clearInterval(questionInterval);
         }
-    }, ( 1000 * 3 ) );
+    }, ( 1000 * 5 ) );
     // questions.forEach( function( question ) {
     //     displayQuestion(question);
     // });
