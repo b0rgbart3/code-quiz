@@ -39,7 +39,8 @@ var questionSet = [javascriptQuestions];
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
 
-var displayQuestion = function(question) {
+
+var displayQuestion = function(question, questionNumber) {
 
     // take the question object and create DOM elements to display the
     // various parts
@@ -47,6 +48,9 @@ var displayQuestion = function(question) {
     var optionsDiv = document.getElementById('options-div');
     var questionTitle = document.createElement('h1');
     var questionButtons = [];
+    var questionNumberDisplayText = document.getElementById('question-number');
+
+    questionNumberDisplayText.textContent = questionNumber+1;
     console.log(window);
     
     // Title--------------
@@ -80,19 +84,23 @@ var delay = [1,1,15,15,15,15,5,5,5,5,5,5,5,5,5];
 var startQuiz = function() {
 
     var questionNumber = 0;
-    displayQuestion(questions[0]);
+    displayQuestion(questions[0], questionNumber);
+
+    // Set up the Time Interval to display a new question every 10 seconds
     var questionInterval= setInterval( function() {
+        
+        
         questionNumber++;
         console.log('In timer' + questionNumber);
         console.log(delay[questionNumber]);
-        displayQuestion(questions[questionNumber]);
+        displayQuestion(questions[questionNumber], questionNumber);
          
-        // console.log(questionNumber);
+        // If we have reached the end of the question array 
         if (questionNumber >= questions.length-1) {
             console.log('about to clear the timer');
             clearInterval(questionInterval);
         }
-    }, ( 1000 * 5 ) );
+    }, ( 1000 * 2 ) );
     // questions.forEach( function( question ) {
     //     displayQuestion(question);
     // });

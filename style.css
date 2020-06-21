@@ -4,6 +4,7 @@
 
 body {
     background-color:#dddddd;
+    color:#444444;
 }
 
 .question-body {
@@ -19,22 +20,25 @@ body {
 }
 
 .question-number {
-    position:absolute;
+    position:relative;
     top:12px;
     left:12px;
     background-color:rgb(44, 102, 228);
-    max-width:80px;
-    max-height:80px;
     color:white;
     text-align:center;
-    padding-top:6px;
-    padding-bottom:4px;
+    padding-top:16px;
+    padding-bottom:14px;
     padding-left:20px;
     padding-right:20px;
-    font-size:2em;
+    font-size:3em;
     border-radius:50%;
     font-family: 'Volkhov', serif;
     font-weight:900;
+    margin:auto;
+    display:block;
+    width:60px;
+    left:-4px;
+    box-shadow: 0 0 8px gray;
 }
 h1 {
     font-family: 'Inconsolata', monospace;
@@ -42,7 +46,8 @@ h1 {
     margin-top:20px;
     padding-top:20px;
     font-size:1.8em;
-    max-width:600px;
+    width:85%;
+    max-width:500px;
     margin:auto;
     padding-bottom:30px;
     margin-bottom:20px;
@@ -81,5 +86,56 @@ button {
 }
 
 button:hover {
-    background-color:rgb(44, 102, 228);
+    background-color:rgb(92, 173, 58);
+    box-shadow:0 0 8px rgb(92, 173, 58);
+    border:none;
+    outline:none;
+}
+
+button:active {
+    background-color:rgb(103, 214, 55);
+    box-shadow:0 0 8px rgb(92, 173, 58);
+    border:none;
+    outline:none;
+    text-shadow:0 0 4px rgb(204, 255, 22);
+}
+
+@media screen and (min-width: 640px) {
+
+
+        .question-number {
+            position: relative;
+            display:inline-block;
+            float:left;
+            top:12px;
+            left:12px;
+            max-width:60px;
+            max-height:80px;
+            text-align:center;
+            padding-top:8px;
+            padding-bottom:6px;
+            padding-left:0px;
+            padding-right:0px;
+            font-size:2em;
+            border-radius:50%;
+            font-weight:900;
+            width:60px;
+            margin-right:10px;
+            margin-top:30px;
+        }
+
+        h1 {
+            margin-top:20px;
+            padding-top:20px;
+            font-size:1.8em;
+            max-width:600px;
+            margin:auto;
+            padding-bottom:30px;
+            margin-bottom:20px;
+            letter-spacing: -.03em;
+            display:inline-block;
+            float:left;
+            margin-top:30px;
+        }
+
 }
