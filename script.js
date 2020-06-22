@@ -23,7 +23,7 @@ const javascriptQuestions = [
     { question: "Arrays in JavaScript can be used to store:",
         options: ["numbers and strings","other arrays","booleans","all of the above"],
         correct: 3,
-        points: 4
+        points: 10
     },
     { question: "The condition in an if/else statement is enclosed within ______:",
     options: ["quotes","curly brackets","parenthesis","square brackets"],
@@ -33,7 +33,7 @@ const javascriptQuestions = [
 ];
 
 var questionSet = [javascriptQuestions];
-var questionNumber = 0;
+var questionNumber;
 
 // keep an array of objects that documents the users responses
 var answeredQuestions = [];  
@@ -48,28 +48,36 @@ var answeredQuestions = [];
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
 var questionTimer;
-var score = 0;
+var score;
 
-var gameOver = false;
-var paused = false;
-var totalPoints = 0;
+var gameOver;
+var paused;
+var totalPoints;
 var initials = [];
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
 var startButton = document.getElementById('start-button');
 var questionBody = document.getElementById('question-body');
+var scoreDisplayText = document.getElementById('score');
 var finalScoreDisplay = document.getElementById('final-score');
 var finalScoreValue = document.getElementById('final-score-value');
-var saveButton = document.getElementById('save-button')
+
 var initialsInput = document.getElementById('initials');
+var saveButton = document.getElementById('save-button')
+var dontSaveButton = document.getElementById('dont-save-button');
 
-saveButton.onclick=function(event) {
-    event.preventDefault();
+var init = function() {
+     questionNumber = 0;
+     score = 0;
 
-    console.log('Save Score for: ' + initialsInput.value.toUpperCase());
-};
+     scoreDisplayText.textContent = score;
+     gameOver = false;
+     paused = false;
+     totalPoints = 0;
+}
 
+init();
 
 startButton.onclick=function() {
 
@@ -79,6 +87,24 @@ startButton.onclick=function() {
     // Let the Quiz Begin!
     startQuiz();
 };
+
+
+saveButton.onclick=function(event) {
+    event.preventDefault();
+
+    console.log('Save Score for: ' + initialsInput.value.toUpperCase());
+};
+
+dontSaveButton.onclick=function(event) {
+    event.preventDefault();
+    finalScoreDisplay.style.display = "none";
+    questionBody.style.display = "block";
+    
+    init();
+
+    startQuiz();
+
+}
 
 var displayQuestionBody = function() {
     displayQuestion(questions[questionNumber]);
@@ -169,7 +195,7 @@ var handleCorrectAnswer = function() {
     answeredQuestions.push ( answerObject );
     score = score + questions[questionNumber].points;
     totalPoints = totalPoints + questions[questionNumber].points;
-    var scoreDisplayText = document.getElementById('score');
+    
     scoreDisplayText.textContent = score;
     correctDisplayText.style.display = "block";
     displayAnswer();
@@ -180,7 +206,6 @@ var handleIncorrectAnswer = function() {
     var answerObject = { questionNumber: questionNumber, correct: false, value: questions[questionNumber].points };
     paused = true;
     answeredQuestions.push ( answerObject );
-    var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
     totalPoints = totalPoints + questions[questionNumber].points;
     incorrectDisplayText.style.display = "block";
