@@ -5,8 +5,8 @@
 //   question:  a string
 //   options:  an array of strings
 //   correct:  an index into the array of options, for the correct answer
-//  points:  a point value to score this question based on
-//  it's difficulty level
+//   points:  a point value to score this question based on
+//            it's difficulty level
 
 
 var javascriptQuestions = [
@@ -28,6 +28,10 @@ var javascriptQuestions = [
     ];
 
 var questionSet = [javascriptQuestions];
+var questionNumber = 0;
+
+// keep track of answered questions, and their values with an array of objects
+var answeredQuestions = [];
 
 // Loop through the questions in the questionObject
 // Present the question to the user, with buttons for each option
@@ -38,9 +42,10 @@ var questionSet = [javascriptQuestions];
 
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
+var score = 0;
 
 
-var displayQuestion = function(question, questionNumber) {
+var displayQuestion = function(question) {
 
     // take the question object and create DOM elements to display the
     // various parts
@@ -68,6 +73,14 @@ var displayQuestion = function(question, questionNumber) {
     question.options.forEach( function(option, index) {
         questionButtons[index] = document.createElement('button');
         questionButtons[index].textContent = option;
+        questionButtons[index].onclick= function(event) {
+            
+            if (event.target.textContent === question.options[question.correct]) {
+                handleCorrectAnswer();
+            } else {
+                handleIncorrectAnswer();
+            }
+        };
         optionsDiv.appendChild(questionButtons[index]);
        // give the user 5 seconds to answer before moving on to next question
 
@@ -83,8 +96,8 @@ var delay = [1,1,15,15,15,15,5,5,5,5,5,5,5,5,5];
 
 var startQuiz = function() {
 
-    var questionNumber = 0;
-    displayQuestion(questions[0], questionNumber);
+
+    displayQuestion(questions[0]);
 
     // Set up the Time Interval to display a new question every 10 seconds
     var questionInterval= setInterval( function() {
@@ -93,16 +106,37 @@ var startQuiz = function() {
         questionNumber++;
         console.log('In timer' + questionNumber);
         console.log(delay[questionNumber]);
-        displayQuestion(questions[questionNumber], questionNumber);
+        displayQuestion(questions[questionNumber]);
          
         // If we have reached the end of the question array 
         if (questionNumber >= questions.length-1) {
             console.log('about to clear the timer');
             clearInterval(questionInterval);
         }
-    }, ( 1000 * 2 ) );
-    // questions.forEach( function( question ) {
-    //     displayQuestion(question);
-    // });
+    }, ( 1000 * 4 ) );
 }
+
+var handleCorrectAnswer = function() {
+    var answerObject = { questionNumber: questionNumber, correct: true, value: questions[questionNumber].points };
+    answeredQuestions.push ( answerObject );
+    console.log( "questionNumber: " + questionNumber);
+    console.log("points: " + questions[questionNumber].points);
+    score = score + questions[questionNumber].points;
+    var scoreDisplayText = document.getElementById('score');
+    console.log("Score: " + score);
+    scoreDisplayText.textContent = score;
+    alert("Correct");
+};
+
+var handleIncorrectAnswer = function() {
+    var answerObject = { questionNumber: questionNumber, correct: false, value: questions[questionNumber].points };
+    answeredQuestions.push ( answerObject );
+    console.log( "questionNumber: " + questionNumber);
+    var scoreDisplayText = document.getElementById('score');
+    console.log("points: " + questions[questionNumber].points);
+    console.log("Score: " + score);
+    scoreDisplayText.textContent = score;
+    alert("Incorrect");
+};
+
 startQuiz();
