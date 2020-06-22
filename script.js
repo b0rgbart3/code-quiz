@@ -108,12 +108,14 @@ playAgainButton.onclick = function() {
 
 saveButton.onclick=function(event) {
     event.preventDefault();
-    var userInitials = initialsInput.value.toUpperCase()
-    console.log('Save Score for: ' + userInitials + ", score: " + score);
-    var highScoreObject = {"initials": userInitials, "score": score};
-    highScores.push(highScoreObject);
-    console.log(highScores);
-    displayHighScores();
+    var userInitials = initialsInput.value.toUpperCase();
+    if (userInitials.length > 1) {
+        console.log('Save Score for: ' + userInitials + ", score: " + score);
+        var highScoreObject = {"initials": userInitials, "score": score};
+        highScores.push(highScoreObject);
+        console.log(highScores);
+        displayHighScores();
+    }
 };
 
 dontSaveButton.onclick=function(event) {
@@ -145,14 +147,22 @@ var displayHighScores = function() {
                 highScoresList.firstChild.remove();
             }
 
-            highScores.forEach( function(element) {
+            highScores.sort((a, b) => (a.score < b.score) ? 1 : -1)
+
+            highScores.forEach( function(element,index) {
             console.log("High score: " + element["initials"] + ", " + element.score);
             var entryInitials = document.createElement('p');
             entryInitials.classList.add("initials-element");
+            if (index == 0) {
+                entryInitials.classList.add("initials-element-winner");
+            }
             entryInitials.textContent = element["initials"];
             highScoresList.appendChild(entryInitials);
             var entryScore = document.createElement('p');
             entryScore.classList.add("scores-element");
+            if (index == 0) {
+                entryScore.classList.add("initials-element-winner");
+            }
             entryScore.textContent = element.score;
             highScoresList.appendChild(entryScore);
         });

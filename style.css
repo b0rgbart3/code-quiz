@@ -243,7 +243,7 @@ input {
   text-align: center;
   font-weight: 900;
   background-color: #c6ffc6;
-  border: none; }
+  border: 2px dashed #80ce80; }
 
 input:focus {
   outline: none; }
@@ -313,6 +313,9 @@ input:active {
   text-transform: uppercase;
   color: black;
   margin: 0; }
+
+.initials-element-winner {
+  background-color: #c6ffc6; }
 
 @media screen and (min-width: 640px) {
   .high-scores-display {

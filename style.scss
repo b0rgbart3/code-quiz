@@ -281,7 +281,7 @@ input {
     text-align:center;
     font-weight:900;
     background-color:rgb(198, 255, 198);
-    border:none;
+    border:2px dashed rgb(128, 206, 128);
 }
 input:focus {
     outline:none;
@@ -334,6 +334,7 @@ input:active {
     margin:0;
 }
 
+
 .scores-header {
     width:50%;
     box-sizing: border-box;
@@ -357,6 +358,10 @@ input:active {
     text-transform: uppercase;
     color:black;
     margin:0;
+}
+
+.initials-element-winner {
+    background-color:rgb(198, 255, 198);
 }
 
 
