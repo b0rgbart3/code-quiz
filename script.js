@@ -137,13 +137,18 @@ var displayQuestionBody = function() {
 var displayHighScores = function() {
     finalScoreDisplay.style.display = "none";
 
-    //highScoresList.remove();
+    while(highScoresList.firstChild) {
+        highScoresList.firstChild.remove();
+    }
+
     highScores.forEach( function(element) {
         console.log("High score: " + element["initials"] + ", " + element.score);
         var entryInitials = document.createElement('p');
+        entryInitials.classList.add("initials-element");
         entryInitials.textContent = element["initials"];
         highScoresList.appendChild(entryInitials);
         var entryScore = document.createElement('p');
+        entryScore.classList.add("scores-element");
         entryScore.textContent = element.score;
         highScoresList.appendChild(entryScore);
     });
