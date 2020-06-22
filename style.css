@@ -100,7 +100,7 @@ h1 {
   max-width: 700px;
   text-align: center; }
 
-button.option {
+.option {
   font-family: 'Inconsolata', monospace;
   background-color: #4d649d;
   padding: 14px;
@@ -121,13 +121,13 @@ button.option {
   cursor: pointer;
   user-select: none; }
 
-button.option:hover {
+.option:hover {
   background-color: #3966da;
   box-shadow: 0 0 8px #3966da;
   border: none;
   outline: none; }
 
-button.option:active {
+.option:active {
   background-color: #0d235b;
   box-shadow: 0 0 8px #0d235b;
   border: none;
@@ -137,9 +137,8 @@ button.option:active {
 button:focus {
   outline: none; }
 
-button.form-button {
+.form-button {
   font-family: 'Inconsolata', monospace;
-  background-color: #199335;
   padding: 14px;
   padding-right: 20px;
   padding-left: 20px;
@@ -155,19 +154,29 @@ button.form-button {
   font-size: 1em;
   letter-spacing: .09em;
   cursor: pointer;
-  user-select: none; }
+  user-select: none;
+  background-color: #6f6f6f; }
 
-button.form-button:hover {
-  background-color: #0eb635;
-  box-shadow: 0 0 8px #0eb635;
+.form-button:hover {
+  background-color: #4b4b4b;
   border: none;
   outline: none; }
 
-button.form-button:active {
+.form-button:active {
+  background-color: #292929;
+  border: none;
+  outline: none; }
+
+.save {
+  background-color: #199335; }
+
+.save:hover {
+  background-color: #0eb635;
+  box-shadow: 0 0 8px #0eb635; }
+
+.save:active {
   background-color: #02c62f;
   box-shadow: 0 0 8px #02c62f;
-  border: none;
-  outline: none;
   text-shadow: 0 0 4px #0eb635; }
 
 .score-box {

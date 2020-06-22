@@ -5,9 +5,15 @@
 $option-color: rgb(77, 100, 157);
 $option-hover:rgb(57, 102, 218);
 $option-active: rgb(13, 35, 91);
-$form-submit: rgb(25, 147, 53);
-$form-submit-hover: rgb(14, 182, 53);
-$form-submit-active: rgb(2, 198, 47);
+
+$plain-button: rgb(111, 111, 111);
+$plain-button-hover:  rgb(75, 75, 75);
+$plain-button-active:  rgb(41, 41, 41);
+
+$save: rgb(25, 147, 53);
+$save-hover: rgb(14, 182, 53);
+$save-active: rgb(2, 198, 47);
+
 
 body {
     background-color:#dddddd;
@@ -115,7 +121,7 @@ h1 {
     text-align: center;
 }
 
-button.option {
+.option {
     font-family: 'Inconsolata', monospace;
     background-color:$option-color;
     padding:14px;
@@ -137,14 +143,14 @@ button.option {
     user-select:none;
 }
 
-button.option:hover {
+.option:hover {
     background-color:$option-hover;
     box-shadow:0 0 8px $option-hover;
     border:none;
     outline:none;
 }
 
-button.option:active {
+.option:active {
     background-color:$option-active;
     box-shadow:0 0 8px $option-active;
     border:none;
@@ -156,9 +162,9 @@ button:focus {
 }
 
 
-button.form-button {
+
+.form-button {
     font-family: 'Inconsolata', monospace;
-    background-color:$form-submit;
     padding:14px;
     padding-right:20px;
     padding-left:20px;
@@ -175,23 +181,35 @@ button.form-button {
     letter-spacing: .09em;
     cursor:pointer;
     user-select:none;
-
+    background-color: $plain-button;
 }
 
-button.form-button:hover {
-    background-color:$form-submit-hover;
-    box-shadow:0 0 8px $form-submit-hover;
+.form-button:hover {
+    background-color:$plain-button-hover;
     border:none;
     outline:none;
 }
 
-button.form-button:active {
-    background-color:$form-submit-active;
-    box-shadow:0 0 8px $form-submit-active;
+.form-button:active {
+    background-color:$plain-button-active;
     border:none;
     outline:none;
-    text-shadow:0 0 4px $form-submit-hover;
 }
+
+.save {
+    background-color:$save;
+}
+.save:hover {
+    background-color:$save-hover;
+    box-shadow:0 0 8px $save-hover;
+}
+.save:active {
+    background-color:$save-active;
+    box-shadow:0 0 8px $save-active;
+    text-shadow:0 0 4px $save-hover;
+}
+
+
 
 .score-box {
     background-color:rgb(86, 156, 86);
