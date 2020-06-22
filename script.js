@@ -8,7 +8,7 @@
 //   points:  a point value to score this question based on
 //            it's difficulty level
 
-
+var sand = 6;
 var javascriptQuestions = [
     { question: "Commonly used datatypes in JavaScript DO NOT include:",
      options: ["strings","booleans","alerts","numbers"],
@@ -42,8 +42,10 @@ var answeredQuestions = [];
 
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
+var questionTimer;
 var score = 0;
 var waiting = false;
+var gameOver = false;
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
@@ -53,9 +55,7 @@ var displayQuestion = function(question) {
     // take the question object and create DOM elements to display the
     // various parts
     var questionDiv = document.getElementById('question-div');
-    var optionsDiv = document.getElementById('options-div');
     var questionTitle = document.createElement('h1');
-    var questionButtons = [];
     var questionNumberDisplayText = document.getElementById('question-number');
 
     questionNumberDisplayText.textContent = questionNumber+1;
@@ -70,42 +70,54 @@ var displayQuestion = function(question) {
 
     // Options-------------
 
-    // If there are already child nodes, let's start by removing them
-    while( optionsDiv.firstChild ) { optionsDiv.firstChild.remove(); }
-
-    question.options.forEach( function(option, index) {
-        questionButtons[index] = document.createElement('button');
-        questionButtons[index].textContent = option;
-        questionButtons[index].onclick= function(event) {
-            
-            if (event.target.textContent === question.options[question.correct]) {
-                handleCorrectAnswer();
-            } else {
-                handleIncorrectAnswer();
-            }
-        };
-        optionsDiv.appendChild(questionButtons[index]);
-
-    });
-
-    
-  
+    displayOptions(question);
 }
+
+var displayOptions = function(question) {
+      var optionsDiv = document.getElementById('options-div');
+      // If there are already child nodes, let's start by removing them
+      while( optionsDiv.firstChild ) { optionsDiv.firstChild.remove(); }
+
+      var questionButtons = [];
+      question.options.forEach( function(option, index) {
+          questionButtons[index] = document.createElement('button');
+          questionButtons[index].textContent = option;
+
+          // Button On-Click Event Handler
+          questionButtons[index].onclick= function(event) {
+              
+            // only respond to buttons if the question hasn't already been answerd.
+            if (!waiting) {
+              if (event.target.textContent === question.options[question.correct]) {
+                  handleCorrectAnswer();
+              } else {
+                  handleIncorrectAnswer();
+              }
+            }
+          };
+          optionsDiv.appendChild(questionButtons[index]);
+  
+      });
+}
+
+
 var nextQuestion = function() {
     questionNumber++;
     if (questionNumber < questions.length) {
         displayQuestion(questions[questionNumber]);
         startTimer();
+    } else {
+        gameOver = true;
     }
 }
 var startTimer=function() {
     waiting = false;
-    var questionTimer = setTimeout( function() {
+    questionTimer = setTimeout( function() {
             if (!waiting) {
                 console.log("timer up ");
                 nextQuestion();
             }
-    } , 3*1000);
+    } , sand*1000);
 
 
 }
@@ -123,7 +135,7 @@ var handleCorrectAnswer = function() {
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
     correctDisplayText.style.display = "block";
-    waitForCorrectnessDisplay();
+    displayAnswer();
 };
 
 var handleIncorrectAnswer = function() {
@@ -133,12 +145,12 @@ var handleIncorrectAnswer = function() {
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
     incorrectDisplayText.style.display = "block";
-    waitForCorrectnessDisplay();
+    displayAnswer();
 };
 
-var waitForCorrectnessDisplay = function() {
+var displayAnswer = function() {
        // We set a new 3 second timer so the user can see the response of: Correct!  or Incorrect!
-    
+       clearTimeout(questionTimer);
        var waitTimeout= setTimeout(function() {
         waiting = false;
         correctDisplayText.style.display = "none";

@@ -18,6 +18,7 @@ body {
     padding-bottom:40px;
     position:relative;
     transition: all 2s;
+    opacity:1;
 }
 
 .question-number {
@@ -112,9 +113,6 @@ button:active {
     right:0;
 }
 
-.hidden {
-    opacity:.1;
-}
 
 .correct-display {
     display:none;
