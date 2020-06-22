@@ -3,7 +3,7 @@
 
 // Global Settings
 const delay = 6;  // seconds allotted for each question
-const pause = 1.3;  // seconds to pause after displaying the answer
+const pause = .3;  // seconds to pause after displaying the answer
 
 var correctAudio = new Audio('correct.mp3');
 var incorrectAudio = new Audio('incorrect.mp3');
@@ -47,7 +47,7 @@ var answeredQuestions = [];
 // when the user selects an option, determine if it was correct,
 // then let them know if they got it right or not, and keep track of their score
 // At the end of the questions, present the user with their score and ask
-// for their initials, and store their initials and score 
+// for their initials, and store their initials and score in the highScores array
 
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
@@ -57,7 +57,7 @@ var score;
 var gameOver;
 var paused;
 var totalPoints;
-var initials = [];
+var highScores = [];
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
@@ -66,10 +66,16 @@ var questionBody = document.getElementById('question-body');
 var scoreDisplayText = document.getElementById('score');
 var finalScoreDisplay = document.getElementById('final-score');
 var finalScoreValue = document.getElementById('final-score-value');
+var highScoresDisplay = document.getElementById('high-scores-display');
+var highScoresList = document.getElementById('high-scores-list');
+
 
 var initialsInput = document.getElementById('initials');
 var saveButton = document.getElementById('save-button')
 var dontSaveButton = document.getElementById('dont-save-button');
+var highScoreButton = document.getElementById('high-score-button');
+var playAgainButton = document.getElementById('play-again-button');
+
 
 var init = function() {
      questionNumber = 0;
@@ -92,22 +98,35 @@ startButton.onclick=function() {
     startQuiz();
 };
 
+playAgainButton.onclick = function() {
+    highScoresDisplay.style.display = "none";
+    questionBody.style.display = "block";
+    
+    // Let the Quiz Begin!
+    startQuiz();
+}
 
 saveButton.onclick=function(event) {
     event.preventDefault();
-
-    console.log('Save Score for: ' + initialsInput.value.toUpperCase());
+    var userInitials = initialsInput.value.toUpperCase()
+    console.log('Save Score for: ' + userInitials + ", score: " + score);
+    var highScoreObject = {"initials": userInitials, "score": score};
+    highScores.push(highScoreObject);
+    console.log(highScores);
+    displayHighScores();
 };
 
 dontSaveButton.onclick=function(event) {
     event.preventDefault();
     finalScoreDisplay.style.display = "none";
     questionBody.style.display = "block";
-    
     init();
-
     startQuiz();
+}
 
+highScoreButton.onclick=function(event) {
+    event.preventDefault();
+    displayHighScores();
 }
 
 var displayQuestionBody = function() {
@@ -115,6 +134,22 @@ var displayQuestionBody = function() {
     displayOptions(questions[questionNumber]);
 }
 
+var displayHighScores = function() {
+    finalScoreDisplay.style.display = "none";
+
+    //highScoresList.remove();
+    highScores.forEach( function(element) {
+        console.log("High score: " + element["initials"] + ", " + element.score);
+        var entryInitials = document.createElement('p');
+        entryInitials.textContent = element["initials"];
+        highScoresList.appendChild(entryInitials);
+        var entryScore = document.createElement('p');
+        entryScore.textContent = element.score;
+        highScoresList.appendChild(entryScore);
+    });
+
+    highScoresDisplay.style.display = "block";
+}
 var displayQuestion = function(question) {
 
     // Display the Title Text of the Question
@@ -186,6 +221,7 @@ var startTimer=function() {
 
 // startQuiz - start things off
 var startQuiz = function() {
+    init();
     // Kick off the first question
     questionNumber = 0;
     displayQuestionBody();

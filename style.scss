@@ -169,12 +169,8 @@ button:focus {
     padding-right:20px;
     padding-left:20px;
     color:white;
-    margin:4px;
     border-radius:8px;
     border:none;
-    min-width:140px;
-    margin:auto;
-    margin-bottom:14px;
     text-transform: uppercase;
     font-weight: 500;
     font-size:1em;
@@ -182,6 +178,9 @@ button:focus {
     cursor:pointer;
     user-select:none;
     background-color: $plain-button;
+    display:block;
+    margin:auto;
+    margin-bottom:12px;
 }
 
 .form-button:hover {
@@ -290,6 +289,26 @@ input:focus {
 input:active {
     outline:none;
 }
+
+.high-scores-display {
+    background-color:white;
+    width:50%;
+    margin:auto;
+    padding:100px;
+    display:none;
+    margin-top:100px;
+    border-radius:8px;
+    text-align:center;
+    box-shadow:0 0 20px gray;
+}
+
+.high-scores-list {
+    font-family: 'Volkhov', serif;
+    border:4px solid red;
+    width:100%;
+    padding:20px;
+}
+
 
 @media screen and (min-width: 640px) {
 
