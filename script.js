@@ -5,6 +5,10 @@
 const delay = 6;  // seconds allotted for each question
 const pause = 1.3;  // seconds to pause after displaying the answer
 
+var correctAudio = new Audio('correct.mp3');
+var incorrectAudio = new Audio('incorrect.mp3');
+correctAudio.volume = .2;
+incorrectAudio.volume = .2;
 
 //   Data -- questions and answer options
 //   This is an array of question objects that contain
@@ -198,6 +202,8 @@ var handleCorrectAnswer = function() {
     
     scoreDisplayText.textContent = score;
     correctDisplayText.style.display = "block";
+
+    correctAudio.play();
     displayAnswer();
 };
 
@@ -209,6 +215,7 @@ var handleIncorrectAnswer = function() {
     scoreDisplayText.textContent = score;
     totalPoints = totalPoints + questions[questionNumber].points;
     incorrectDisplayText.style.display = "block";
+    incorrectAudio.play();
     displayAnswer();
 };
 
