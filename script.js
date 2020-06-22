@@ -9,6 +9,7 @@
 //            it's difficulty level
 
 var sand = 6;
+var answerSand = 1;
 var javascriptQuestions = [
     { question: "Commonly used datatypes in JavaScript DO NOT include:",
      options: ["strings","booleans","alerts","numbers"],
@@ -46,11 +47,14 @@ var questionTimer;
 var score = 0;
 var waiting = false;
 var gameOver = false;
+var totalPoints = 0;
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
 var startButton = document.getElementById('start-button');
 var questionBody = document.getElementById('question-body');
+var finalScoreDisplay = document.getElementById('final-score');
+var finalScoreValue = document.getElementById('final-score-value');
 
 startButton.onclick=function() {
 
@@ -69,7 +73,7 @@ var displayQuestion = function(question) {
     var questionNumberDisplayText = document.getElementById('question-number');
 
     questionNumberDisplayText.textContent = questionNumber+1;
-    console.log(window);
+    //console.log(window);
     
     // Title--------------
     questionTitle.textContent = question.question;
@@ -113,18 +117,20 @@ var displayOptions = function(question) {
 
 var nextQuestion = function() {
     questionNumber++;
+    
+    
     if (questionNumber < questions.length) {
         displayQuestion(questions[questionNumber]);
         startTimer();
     } else {
-        gameOver = true;
+        endQuiz();
     }
 }
 var startTimer=function() {
     waiting = false;
     questionTimer = setTimeout( function() {
             if (!waiting) {
-                console.log("timer up ");
+               // console.log("timer up ");
                 nextQuestion();
             }
     } , sand*1000);
@@ -142,6 +148,11 @@ var handleCorrectAnswer = function() {
     waiting = true;
     answeredQuestions.push ( answerObject );
     score = score + questions[questionNumber].points;
+    // console.log("In nextQuestion: questionNumber=" + questionNumber );
+    // console.log("questions.length = " + questions.length);
+    // console.log("Question question: " + questions[questionNumber].question);
+    // console.log( "question points: " + questions[questionNumber].points);
+    totalPoints = totalPoints + questions[questionNumber].points;
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
     correctDisplayText.style.display = "block";
@@ -154,6 +165,7 @@ var handleIncorrectAnswer = function() {
     answeredQuestions.push ( answerObject );
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
+    totalPoints = totalPoints + questions[questionNumber].points;
     incorrectDisplayText.style.display = "block";
     displayAnswer();
 };
@@ -166,6 +178,12 @@ var displayAnswer = function() {
         correctDisplayText.style.display = "none";
         incorrectDisplayText.style.display = "none";
         nextQuestion();
-     }, 1000 * 3);
+     }, 1000 * answerSand);
 }
 
+var endQuiz = function() {
+    gameOver = true;
+    questionBody.style.display = "none";
+    finalScoreDisplay.style.display = "block";
+    finalScoreValue.innerHTML = "&nbsp;&nbsp;" + score + " / " + totalPoints;
+}
