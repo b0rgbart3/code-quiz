@@ -95,6 +95,7 @@ var displayOptions = function(question) {
       var questionButtons = [];
       question.options.forEach( function(option, index) {
           questionButtons[index] = document.createElement('button');
+          questionButtons[index].classList.add('question');
           questionButtons[index].textContent = option;
 
           // Button On-Click Event Handler

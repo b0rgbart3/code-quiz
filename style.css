@@ -108,7 +108,7 @@ h1 {
     text-align: center;
 }
 
-button {
+button.question {
     font-family: 'Inconsolata', monospace;
     background-color:rgb(44, 102, 228);
     padding:14px;
@@ -131,14 +131,52 @@ button {
 
 }
 
-button:hover {
+button.question:hover {
     background-color:rgb(92, 173, 58);
     box-shadow:0 0 8px rgb(92, 173, 58);
     border:none;
     outline:none;
 }
 
-button:active {
+button.question:active {
+    background-color:rgb(103, 214, 55);
+    box-shadow:0 0 8px rgb(92, 173, 58);
+    border:none;
+    outline:none;
+    text-shadow:0 0 4px rgb(204, 255, 22);
+}
+
+
+button.form-button {
+    font-family: 'Inconsolata', monospace;
+    background-color:rgb(44, 102, 228);
+    padding:14px;
+    padding-right:20px;
+    padding-left:20px;
+    color:white;
+    margin:4px;
+    border-radius:8px;
+    border:none;
+    min-width:140px;
+    margin:auto;
+    margin-bottom:14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size:1em;
+    letter-spacing: .09em;
+    cursor:pointer;
+    user-select:none;
+
+}
+
+button.form-button:hover {
+    background-color:rgb(92, 173, 58);
+    box-shadow:0 0 8px rgb(92, 173, 58);
+    border:none;
+    outline:none;
+}
+
+button.form-button:active {
     background-color:rgb(103, 214, 55);
     box-shadow:0 0 8px rgb(92, 173, 58);
     border:none;
@@ -174,6 +212,8 @@ button:active {
     display:none;
     margin-top:100px;
     border-radius:8px;
+    text-align:center;
+    box-shadow:0 0 20px gray;
 }
 
 .score-title {
@@ -186,6 +226,28 @@ button:active {
     letter-spacing:-.03em;
     padding:0;
     font-family: 'Volkhov', serif;
+}
+
+input {
+    font-size:2.4em;
+    width:180px;
+    text-transform: uppercase;
+    padding:12px;
+    font-family: 'Inconsolata', monospace;
+    color:#444444;
+    outline:none;
+    margin-top:4px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:900;
+    background-color:rgb(198, 255, 198);
+    border:none;
+}
+input:focus {
+    outline:none;
+}
+input:active {
+    outline:none;
 }
 
 @media screen and (min-width: 640px) {
