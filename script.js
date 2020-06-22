@@ -1,5 +1,12 @@
 
-//   Data -- an object with questions and answers
+//   Javascript code written by Bat Dority
+
+// Global Settings
+const delay = 6;  // seconds allotted for each question
+const pause = 1;  // pause after displaying the answer
+
+
+//   Data -- questions and answer options
 //   This is an array of question objects that contain
 //   the following keys:  question, options, correct, points
 //   question:  a string
@@ -7,10 +14,7 @@
 //   correct:  an index into the array of options, for the correct answer
 //   points:  a point value to score this question based on
 //            it's difficulty level
-
-var sand = 6;
-var answerSand = 1;
-var javascriptQuestions = [
+const javascriptQuestions = [
     { question: "Commonly used datatypes in JavaScript DO NOT include:",
      options: ["strings","booleans","alerts","numbers"],
      correct: 2,
@@ -25,16 +29,16 @@ var javascriptQuestions = [
     options: ["quotes","curly brackets","parenthesis","square brackets"],
     correct: 2,
     points: 4
-},
-    ];
+    },
+];
 
 var questionSet = [javascriptQuestions];
 var questionNumber = 0;
 
-// keep track of answered questions, and their values with an array of objects
-var answeredQuestions = [];
+// keep an array of objects that documents the users responses
+var answeredQuestions = [];  
 
-// Loop through the questions in the questionObject
+
 // Present the question to the user, with buttons for each option
 // when the user selects an option, determine if it was correct,
 // then let them know if they got it right or not, and keep track of their score
@@ -45,8 +49,9 @@ var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
 var questionTimer;
 var score = 0;
-var waiting = false;
+
 var gameOver = false;
+var paused = false;
 var totalPoints = 0;
 var initials = [];
 
@@ -70,21 +75,22 @@ startButton.onclick=function() {
 
     startButton.style.display = "none";
     questionBody.style.display = "block";
-    // Kick off the Quiz
+
+    // Let the Quiz Begin!
     startQuiz();
 };
 
+var displayQuestionBody = function() {
+    displayQuestion(questions[questionNumber]);
+    displayOptions(questions[questionNumber]);
+}
+
 var displayQuestion = function(question) {
 
-    // take the question object and create DOM elements to display the
-    // various parts
+    // Display the Title Text of the Question
     var questionDiv = document.getElementById('question-div');
     var questionTitle = document.createElement('h1');
     var questionNumberDisplayText = document.getElementById('question-number');
-
-    questionNumberDisplayText.textContent = questionNumber+1;
-    //console.log(window);
-    
     // Title--------------
     questionTitle.textContent = question.question;
 
@@ -92,9 +98,9 @@ var displayQuestion = function(question) {
     if (questionDiv.firstChild) { questionDiv.firstChild.remove(); }
     questionDiv.appendChild(questionTitle);
 
-    // Options-------------
-
-    displayOptions(question);
+    // Display the first question as 1, instead of 0
+    questionNumberDisplayText.textContent = questionNumber+1;  
+    
 }
 
 var displayOptions = function(question) {
@@ -112,7 +118,7 @@ var displayOptions = function(question) {
           questionButtons[index].onclick= function(event) {
               
             // only respond to buttons if the question hasn't already been answerd.
-            if (!waiting) {
+            if (!paused) {
               if (event.target.textContent === question.options[question.correct]) {
                   handleCorrectAnswer();
               } else {
@@ -129,40 +135,39 @@ var displayOptions = function(question) {
 var nextQuestion = function() {
     questionNumber++;
     
-    
     if (questionNumber < questions.length) {
-        displayQuestion(questions[questionNumber]);
+        displayQuestionBody();
         startTimer();
     } else {
         endQuiz();
     }
 }
+
+
 var startTimer=function() {
-    waiting = false;
+    paused = false;
     questionTimer = setTimeout( function() {
-            if (!waiting) {
-               // console.log("timer up ");
+            if (!paused) {
                 nextQuestion();
             }
-    } , sand*1000);
-
+    } , delay*1000);
 
 }
+
+// startQuiz - start things off
 var startQuiz = function() {
+    // Kick off the first question
     questionNumber = 0;
-    displayQuestion(questions[questionNumber]);
+    displayQuestionBody();
     startTimer();
 }
 
+// handleCorrectAnswer - let the user know they got this answer right
 var handleCorrectAnswer = function() {
     var answerObject = { questionNumber: questionNumber, correct: true, value: questions[questionNumber].points };
-    waiting = true;
+    paused = true;
     answeredQuestions.push ( answerObject );
     score = score + questions[questionNumber].points;
-    // console.log("In nextQuestion: questionNumber=" + questionNumber );
-    // console.log("questions.length = " + questions.length);
-    // console.log("Question question: " + questions[questionNumber].question);
-    // console.log( "question points: " + questions[questionNumber].points);
     totalPoints = totalPoints + questions[questionNumber].points;
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
@@ -170,9 +175,10 @@ var handleCorrectAnswer = function() {
     displayAnswer();
 };
 
+// handleCorrectAnswer - let the user know they got this answer wrong
 var handleIncorrectAnswer = function() {
     var answerObject = { questionNumber: questionNumber, correct: false, value: questions[questionNumber].points };
-    waiting = true;
+    paused = true;
     answeredQuestions.push ( answerObject );
     var scoreDisplayText = document.getElementById('score');
     scoreDisplayText.textContent = score;
@@ -181,17 +187,27 @@ var handleIncorrectAnswer = function() {
     displayAnswer();
 };
 
+// displayAnswer - respond to the users choice 
 var displayAnswer = function() {
-       // We set a new 3 second timer so the user can see the response of: Correct!  or Incorrect!
-       clearTimeout(questionTimer);
-       var waitTimeout= setTimeout(function() {
-        waiting = false;
-        correctDisplayText.style.display = "none";
-        incorrectDisplayText.style.display = "none";
-        nextQuestion();
-     }, 1000 * answerSand);
+       // Here, we set a new timer to pause the program flow so the 
+       // user can see the response of: Correct!  or Incorrect!
+       
+        // Clear the main delay timer
+        clearTimeout(questionTimer);
+
+        // Create new timer for the pause
+        var waitTimeout= setTimeout(endPause, 1000 * pause);
 }
 
+// endPause - callback function when the pause timer is done
+var endPause = function() {     
+    paused = false;
+    correctDisplayText.style.display = "none";
+    incorrectDisplayText.style.display = "none";
+    nextQuestion();
+}
+
+// endQuiz - we've displayed all the quesitons, and run out of time
 var endQuiz = function() {
     gameOver = true;
     questionBody.style.display = "none";
