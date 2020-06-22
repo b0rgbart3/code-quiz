@@ -48,6 +48,7 @@ var score = 0;
 var waiting = false;
 var gameOver = false;
 var totalPoints = 0;
+var initials = [];
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
@@ -55,6 +56,15 @@ var startButton = document.getElementById('start-button');
 var questionBody = document.getElementById('question-body');
 var finalScoreDisplay = document.getElementById('final-score');
 var finalScoreValue = document.getElementById('final-score-value');
+var saveButton = document.getElementById('save-button')
+var initialsInput = document.getElementById('initials');
+
+saveButton.onclick=function(event) {
+    event.preventDefault();
+
+    console.log('Save Score for: ' + initialsInput.value.toUpperCase());
+};
+
 
 startButton.onclick=function() {
 
