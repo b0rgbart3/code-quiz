@@ -7,6 +7,49 @@ body {
     color:#444444;
 }
 
+.start-button {
+    background-color:white;
+    text-transform: uppercase;
+    padding:14px;
+    border-radius:8px;
+    border:2px solid #eeeeee;
+    width:50%;
+    margin:auto;
+    text-align: center;
+    padding-top:30px;
+    padding-bottom:28px;
+    font-family: 'Inconsolata', monospace;
+    font-weight: 900;
+    font-size:2em;
+    box-shadow:0 0 20px gray;
+    user-select: none;
+    margin-top:100px;
+    cursor: pointer;
+    outline:none;
+    position:relative;
+    top:0;
+    left:0;
+    min-width:300px;
+    max-width:600px;
+}
+
+.start-button:hover {
+    background-color:rgb(86, 156, 86);
+    color:white;
+    border-color:rgb(86, 156, 86);;
+    outline:none;
+}
+
+.start-button:active {
+    background-color:rgb(28, 199, 28);
+    text-shadow:rgb(124, 242, 56);
+    border-color:rgb(124, 242, 56);
+    box-shadow:0 0 20px rgb(124, 242, 56);
+    outline:none;
+    top:2px;
+    left:1px;
+}
+
 .question-body {
     background-color:white;
     margin:auto;
@@ -19,6 +62,7 @@ body {
     position:relative;
     transition: all 2s;
     opacity:1;
+    display:none;
 }
 
 .question-number {
@@ -108,7 +152,7 @@ button:active {
     text-transform: uppercase;
     color:white;
     padding:14px;
-    position: absolute;
+    position: fixed;
     top:0;
     right:0;
 }

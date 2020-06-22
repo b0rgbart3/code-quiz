@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id='start-button' class='start-button'>Start the Quiz</div>
 
-    <article class='question-body'>
+    <article class='question-body' id='question-body'>
         <div class='question-number' id='question-number'>1</div>
         <div id='question-div' class='stretch-center'></div>
         <div id='options-div' class='stretch-center'></div>
+        <div class='score-box'>
+            Current Score: <span id='score'>0</span>
+        </div>
+        <div class='correct-display' id='correct-display'>Correct!</div>
+        <div class='incorrect-display' id='incorrect-display'>Incorrect!</div>
     </article>
-    <div class='score-box'>
-        Current Score: <span id='score'>0</span>
-    </div>
-    <div class='correct-display' id='correct-display'>Correct!</div>
-    <div class='incorrect-display' id='incorrect-display'>Incorrect!</div>
+    
 </body>
 <script src="./script.js"></script>
 </html>

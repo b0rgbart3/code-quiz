@@ -49,6 +49,16 @@ var gameOver = false;
 
 var correctDisplayText = document.getElementById('correct-display');
 var incorrectDisplayText = document.getElementById('incorrect-display');
+var startButton = document.getElementById('start-button');
+var questionBody = document.getElementById('question-body');
+
+startButton.onclick=function() {
+
+    startButton.style.display = "none";
+    questionBody.style.display = "block";
+    // Kick off the Quiz
+    startQuiz();
+};
 
 var displayQuestion = function(question) {
 
@@ -159,5 +169,3 @@ var displayAnswer = function() {
      }, 1000 * 3);
 }
 
-// Kick off the Quiz
-startQuiz();
