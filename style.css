@@ -116,6 +116,14 @@ button:active {
     opacity:.1;
 }
 
+.correct-display {
+    display:none;
+}
+
+.incorrect-display {
+    display:none;
+}
+
 @media screen and (min-width: 640px) {
 
 

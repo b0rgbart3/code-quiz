@@ -45,6 +45,8 @@ var questions = questionSet[chosenSetIndex];
 var score = 0;
 var waiting = false;
 
+var correctDisplayText = document.getElementById('correct-display');
+var incorrectDisplayText = document.getElementById('incorrect-display');
 
 var displayQuestion = function(question) {
 
@@ -83,23 +85,26 @@ var displayQuestion = function(question) {
             }
         };
         optionsDiv.appendChild(questionButtons[index]);
-       // give the user 5 seconds to answer before moving on to next question
 
     });
 
     
   
 }
-
-var startTimer=function() {
-    waiting = true;
-    var questionTimer = setTimeout( function() {
-        console.log("timer up ");
-        questionNumber++;
-        if (questionNumber < questions.length) {
+var nextQuestion = function() {
+    questionNumber++;
+    if (questionNumber < questions.length) {
         displayQuestion(questions[questionNumber]);
         startTimer();
-        }
+    }
+}
+var startTimer=function() {
+    waiting = false;
+    var questionTimer = setTimeout( function() {
+            if (!waiting) {
+                console.log("timer up ");
+                nextQuestion();
+            }
     } , 3*1000);
 
 
@@ -112,25 +117,35 @@ var startQuiz = function() {
 
 var handleCorrectAnswer = function() {
     var answerObject = { questionNumber: questionNumber, correct: true, value: questions[questionNumber].points };
+    waiting = true;
     answeredQuestions.push ( answerObject );
-    console.log( "questionNumber: " + questionNumber);
-    console.log("points: " + questions[questionNumber].points);
     score = score + questions[questionNumber].points;
     var scoreDisplayText = document.getElementById('score');
-    console.log("Score: " + score);
     scoreDisplayText.textContent = score;
-    alert("Correct");
+    correctDisplayText.style.display = "block";
+    waitForCorrectnessDisplay();
 };
 
 var handleIncorrectAnswer = function() {
     var answerObject = { questionNumber: questionNumber, correct: false, value: questions[questionNumber].points };
+    waiting = true;
     answeredQuestions.push ( answerObject );
-    console.log( "questionNumber: " + questionNumber);
     var scoreDisplayText = document.getElementById('score');
-    console.log("points: " + questions[questionNumber].points);
-    console.log("Score: " + score);
     scoreDisplayText.textContent = score;
-    alert("Incorrect");
+    incorrectDisplayText.style.display = "block";
+    waitForCorrectnessDisplay();
 };
 
+var waitForCorrectnessDisplay = function() {
+       // We set a new 3 second timer so the user can see the response of: Correct!  or Incorrect!
+    
+       var waitTimeout= setTimeout(function() {
+        waiting = false;
+        correctDisplayText.style.display = "none";
+        incorrectDisplayText.style.display = "none";
+        nextQuestion();
+     }, 1000 * 3);
+}
+
+// Kick off the Quiz
 startQuiz();
