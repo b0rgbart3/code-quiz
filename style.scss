@@ -246,9 +246,9 @@ button:focus {
 
 .final-score {
     background-color:white;
-    width:50%;
+    width:90%;
     margin:auto;
-    padding:100px;
+    padding:10px;
     display:none;
     margin-top:100px;
     border-radius:8px;
@@ -292,9 +292,9 @@ input:active {
 
 .high-scores-display {
     background-color:white;
-    width:50%;
+    width:90%;
     margin:auto;
-    padding:100px;
+    padding:10px;
     display:none;
     margin-top:100px;
     border-radius:8px;
@@ -362,6 +362,16 @@ input:active {
 
 @media screen and (min-width: 640px) {
 
+    .high-scores-display {
+        padding:100px;
+        width:50%;
+    }
+
+    .final-score {
+      
+        width:50%;
+        padding:100px;
+    }
 
         .question-number {
             position: relative;

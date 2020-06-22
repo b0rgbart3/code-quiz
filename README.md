@@ -13,9 +13,13 @@ SO THAT I can gauge my progress compared to my peers
 
 1.  Each question has a weighted-score value from 1 - 10.  
 2.  The final score is displayed to the user at the end of the quiz.
-3.  The user is asked for their initials, so their score can be compred against their classmates.
-4.  Keeps track of the users current score
+3.  The user is given the option to save their score, with their initials, so their score can be compred against others.
+4.  Keeps track of the users current and final score
+5.  Displays high scores with player initials in a list
+6.  Allows user to play again.
 
 ## Technologies
 1.  Javascript
 2.  HTML5 / CSS3
+3.  HTML5 based audio with MP3s for correct and incorrect answers
+4.  Sass compiler for button styling

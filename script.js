@@ -118,6 +118,9 @@ saveButton.onclick=function(event) {
 
 dontSaveButton.onclick=function(event) {
     event.preventDefault();
+    restart();
+}
+var restart= function() {
     finalScoreDisplay.style.display = "none";
     questionBody.style.display = "block";
     init();
@@ -135,25 +138,29 @@ var displayQuestionBody = function() {
 }
 
 var displayHighScores = function() {
-    finalScoreDisplay.style.display = "none";
+    if (highScores.length > 0) {
+            finalScoreDisplay.style.display = "none";
 
-    while(highScoresList.firstChild) {
-        highScoresList.firstChild.remove();
+            while(highScoresList.firstChild) {
+                highScoresList.firstChild.remove();
+            }
+
+            highScores.forEach( function(element) {
+            console.log("High score: " + element["initials"] + ", " + element.score);
+            var entryInitials = document.createElement('p');
+            entryInitials.classList.add("initials-element");
+            entryInitials.textContent = element["initials"];
+            highScoresList.appendChild(entryInitials);
+            var entryScore = document.createElement('p');
+            entryScore.classList.add("scores-element");
+            entryScore.textContent = element.score;
+            highScoresList.appendChild(entryScore);
+        });
+
+        highScoresDisplay.style.display = "block";
+    } else {
+        restart();
     }
-
-    highScores.forEach( function(element) {
-        console.log("High score: " + element["initials"] + ", " + element.score);
-        var entryInitials = document.createElement('p');
-        entryInitials.classList.add("initials-element");
-        entryInitials.textContent = element["initials"];
-        highScoresList.appendChild(entryInitials);
-        var entryScore = document.createElement('p');
-        entryScore.classList.add("scores-element");
-        entryScore.textContent = element.score;
-        highScoresList.appendChild(entryScore);
-    });
-
-    highScoresDisplay.style.display = "block";
 }
 var displayQuestion = function(question) {
 
@@ -218,6 +225,7 @@ var startTimer=function() {
     paused = false;
     questionTimer = setTimeout( function() {
             if (!paused) {
+                incorrectAudio.play();
                 nextQuestion();
             }
     } , delay*1000);
@@ -239,7 +247,7 @@ var handleCorrectAnswer = function() {
     paused = true;
     answeredQuestions.push ( answerObject );
     score = score + questions[questionNumber].points;
-    totalPoints = totalPoints + questions[questionNumber].points;
+    //totalPoints = totalPoints + questions[questionNumber].points;
     
     scoreDisplayText.textContent = score;
     correctDisplayText.style.display = "block";
@@ -254,7 +262,7 @@ var handleIncorrectAnswer = function() {
     paused = true;
     answeredQuestions.push ( answerObject );
     scoreDisplayText.textContent = score;
-    totalPoints = totalPoints + questions[questionNumber].points;
+   // totalPoints = totalPoints + questions[questionNumber].points;
     incorrectDisplayText.style.display = "block";
     incorrectAudio.play();
     displayAnswer();
@@ -281,9 +289,17 @@ var endPause = function() {
 }
 
 // endQuiz - we've displayed all the quesitons, and run out of time
+// so let's display the final score
+
 var endQuiz = function() {
     gameOver = true;
     questionBody.style.display = "none";
+    initialsInput.value= "";
+    totalPoints = 0;
+    questions.forEach( function(element) {
+        totalPoints += element.points;
+    });
+
     finalScoreDisplay.style.display = "block";
     finalScoreValue.innerHTML = "&nbsp;&nbsp;" + score + " / " + totalPoints;
 }
