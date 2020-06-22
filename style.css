@@ -17,6 +17,7 @@ body {
     margin-top:40px;
     padding-bottom:40px;
     position:relative;
+    transition: all 2s;
 }
 
 .question-number {
@@ -109,6 +110,10 @@ button:active {
     position: absolute;
     top:0;
     right:0;
+}
+
+.hidden {
+    opacity:.1;
 }
 
 @media screen and (min-width: 640px) {

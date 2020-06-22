@@ -14,6 +14,7 @@ SO THAT I can gauge my progress compared to my peers
 1.  Each question has a weighted-score value from 1 - 10.  
 2.  The final score is displayed to the user at the end of the quiz.
 3.  The user is asked for their initials, so their score can be compred against their classmates.
+4.  Keeps track of the users current score
 
 ## Technologies
 1.  Javascript
