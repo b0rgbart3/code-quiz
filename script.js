@@ -43,6 +43,7 @@ var answeredQuestions = [];
 var chosenSetIndex = 0;
 var questions = questionSet[chosenSetIndex];
 var score = 0;
+var waiting = false;
 
 
 var displayQuestion = function(question) {
@@ -85,35 +86,28 @@ var displayQuestion = function(question) {
        // give the user 5 seconds to answer before moving on to next question
 
     });
-    
-    
 
+    
   
 }
 
-var delay = [1,1,15,15,15,15,5,5,5,5,5,5,5,5,5];
-
-
-var startQuiz = function() {
-
-
-    displayQuestion(questions[0]);
-
-    // Set up the Time Interval to display a new question every 10 seconds
-    var questionInterval= setInterval( function() {
-        
-        
+var startTimer=function() {
+    waiting = true;
+    var questionTimer = setTimeout( function() {
+        console.log("timer up ");
         questionNumber++;
-        console.log('In timer' + questionNumber);
-        console.log(delay[questionNumber]);
+        if (questionNumber < questions.length) {
         displayQuestion(questions[questionNumber]);
-         
-        // If we have reached the end of the question array 
-        if (questionNumber >= questions.length-1) {
-            console.log('about to clear the timer');
-            clearInterval(questionInterval);
+        startTimer();
         }
-    }, ( 1000 * 4 ) );
+    } , 3*1000);
+
+
+}
+var startQuiz = function() {
+    questionNumber = 0;
+    displayQuestion(questions[questionNumber]);
+    startTimer();
 }
 
 var handleCorrectAnswer = function() {
