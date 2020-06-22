@@ -1,6 +1,7 @@
 # code-quiz
 This application displays a series of questions to quiz the user on their knowledge of Javascript.
 
+<a href='https://b0rgbart3.github.io/code-quiz/'>Live Demo</a>
 ## User Story
 
 ```
@@ -23,3 +24,8 @@ SO THAT I can gauge my progress compared to my peers
 2.  HTML5 / CSS3
 3.  HTML5 based audio with MP3s for correct and incorrect answers
 4.  Sass compiler for button styling
+
+## screens
+![Question Screen](question.jpg)
+
+![HighScores Screen](highscores.jpg)
