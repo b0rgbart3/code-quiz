@@ -3,7 +3,7 @@
 
 // Global Settings
 const delay = 6;  // seconds allotted for each question
-const pause = 1;  // pause after displaying the answer
+const pause = 1.3;  // seconds to pause after displaying the answer
 
 
 //   Data -- questions and answer options
@@ -111,7 +111,7 @@ var displayOptions = function(question) {
       var questionButtons = [];
       question.options.forEach( function(option, index) {
           questionButtons[index] = document.createElement('button');
-          questionButtons[index].classList.add('question');
+          questionButtons[index].classList.add('option');
           questionButtons[index].textContent = option;
 
           // Button On-Click Event Handler

@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700;800&display=swap');
+
+$option-color: rgb(77, 100, 157);
+$option-hover:rgb(57, 102, 218);
+$option-active: rgb(13, 35, 91);
+$form-submit: rgb(25, 147, 53);
+$form-submit-hover: rgb(14, 182, 53);
+$form-submit-active: rgb(2, 198, 47);
+
+body {
+    background-color:#dddddd;
+    color:#444444;
+}
+
+.start-button {
+    background-color:white;
+    text-transform: uppercase;
+    padding:14px;
+    border-radius:8px;
+    border:2px solid #eeeeee;
+    width:50%;
+    margin:auto;
+    text-align: center;
+    padding-top:30px;
+    padding-bottom:28px;
+    font-family: 'Inconsolata', monospace;
+    font-weight: 900;
+    font-size:2em;
+    box-shadow:0 0 20px gray;
+    user-select: none;
+    margin-top:100px;
+    cursor: pointer;
+    outline:none;
+    position:relative;
+    top:0;
+    left:0;
+    min-width:300px;
+    max-width:600px;
+}
+
+.start-button:hover {
+    background-color:rgb(86, 156, 86);
+    color:white;
+    border-color:rgb(86, 156, 86);;
+    outline:none;
+}
+
+.start-button:active {
+    background-color:rgb(28, 199, 28);
+    text-shadow:rgb(124, 242, 56);
+    border-color:rgb(124, 242, 56);
+    box-shadow:0 0 20px rgb(124, 242, 56);
+    outline:none;
+    top:2px;
+    left:1px;
+}
+
+.question-body {
+    background-color:white;
+    margin:auto;
+    border-radius:8px;
+    box-shadow:0 0 8px gray;
+    width:100%;
+    max-width:740px;
+    margin-top:40px;
+    padding-bottom:40px;
+    position:relative;
+    transition: all 2s;
+    opacity:1;
+    display:none;
+    box-sizing: border-box;
+}
+
+.question-number {
+    position:relative;
+    top:12px;
+    left:12px;
+    background-color:$option-color;
+    color:white;
+    text-align:center;
+    padding-top:16px;
+    padding-bottom:14px;
+    padding-left:20px;
+    padding-right:20px;
+    font-size:3em;
+    border-radius:50%;
+    font-family: 'Volkhov', serif;
+    font-weight:900;
+    margin:auto;
+    display:block;
+    width:60px;
+    left:-4px;
+    box-shadow: 0 0 8px $option-color;
+}
+h1 {
+    font-family: 'Volkhov', serif;
+    margin-top:20px;
+    padding-top:20px;
+    font-size:1.8em;
+    width:85%;
+    max-width:500px;
+    margin:auto;
+    padding-bottom:30px;
+    margin-bottom:20px;
+    letter-spacing: -.03em;
+}
+
+.stretch-center {
+    margin-left:auto;
+    margin-right:auto;
+    width:100%;
+    max-width:700px;
+    text-align: center;
+}
+
+button.option {
+    font-family: 'Inconsolata', monospace;
+    background-color:$option-color;
+    padding:14px;
+    padding-right:20px;
+    padding-left:20px;
+    color:white;
+    display:block;
+    margin:4px;
+    border-radius:8px;
+    border:none;
+    min-width:240px;
+    margin:auto;
+    margin-bottom:14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size:1em;
+    letter-spacing: .09em;
+    cursor:pointer;
+    user-select:none;
+}
+
+button.option:hover {
+    background-color:$option-hover;
+    box-shadow:0 0 8px $option-hover;
+    border:none;
+    outline:none;
+}
+
+button.option:active {
+    background-color:$option-active;
+    box-shadow:0 0 8px $option-active;
+    border:none;
+    outline:none;
+    text-shadow:0 0 4px $option-hover;
+}
+button:focus {
+    outline:none;
+}
+
+
+button.form-button {
+    font-family: 'Inconsolata', monospace;
+    background-color:$form-submit;
+    padding:14px;
+    padding-right:20px;
+    padding-left:20px;
+    color:white;
+    margin:4px;
+    border-radius:8px;
+    border:none;
+    min-width:140px;
+    margin:auto;
+    margin-bottom:14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size:1em;
+    letter-spacing: .09em;
+    cursor:pointer;
+    user-select:none;
+
+}
+
+button.form-button:hover {
+    background-color:$form-submit-hover;
+    box-shadow:0 0 8px $form-submit-hover;
+    border:none;
+    outline:none;
+}
+
+button.form-button:active {
+    background-color:$form-submit-active;
+    box-shadow:0 0 8px $form-submit-active;
+    border:none;
+    outline:none;
+    text-shadow:0 0 4px $form-submit-hover;
+}
+
+.score-box {
+    background-color:rgb(86, 156, 86);
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color:white;
+    padding:14px;
+    position: fixed;
+    top:0;
+    right:0;
+}
+
+.display-answer {
+    font-family: 'Inconsolata', monospace;
+    position:absolute;
+    top:0;
+    padding:30px;
+    box-sizing: border-box;
+    width:100%;
+    color:white;
+    display:none;
+    text-align: center;
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    font-size:2em;
+
+}
+.correct-display {
+    background-color:green;
+}
+
+.incorrect-display {
+    background-color:red;
+}
+
+.final-score {
+    background-color:white;
+    width:50%;
+    margin:auto;
+    padding:100px;
+    display:none;
+    margin-top:100px;
+    border-radius:8px;
+    text-align:center;
+    box-shadow:0 0 20px gray;
+}
+
+.score-title {
+    text-align: center;
+    margin:auto;
+    display:block;
+    float:none;
+    margin:0;
+    font-size:2.4em;
+    letter-spacing:-.03em;
+    padding:0;
+    font-family: 'Volkhov', serif;
+}
+
+input {
+    font-size:2.4em;
+    width:180px;
+    text-transform: uppercase;
+    padding:12px;
+    font-family: 'Inconsolata', monospace;
+    color:#444444;
+    outline:none;
+    margin-top:4px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:900;
+    background-color:rgb(198, 255, 198);
+    border:none;
+}
+input:focus {
+    outline:none;
+}
+input:active {
+    outline:none;
+}
+
+@media screen and (min-width: 640px) {
+
+
+        .question-number {
+            position: relative;
+            display:inline-block;
+            float:left;
+            top:12px;
+            left:12px;
+            max-width:60px;
+            max-height:80px;
+            text-align:center;
+            padding-top:8px;
+            padding-bottom:6px;
+            padding-left:0px;
+            padding-right:0px;
+            font-size:2em;
+            border-radius:50%;
+            font-weight:900;
+            width:60px;
+            margin-right:10px;
+            margin-top:30px;
+        }
+
+        h1 {
+            margin-top:20px;
+            padding-top:20px;
+            font-size:1.8em;
+            max-width:600px;
+            margin:auto;
+            padding-bottom:30px;
+            margin-bottom:20px;
+            letter-spacing: -.03em;
+            display:inline-block;
+            float:left;
+            margin-top:30px;
+        }
+
+}
