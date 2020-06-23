@@ -68,6 +68,7 @@ var finalScoreDisplay = document.getElementById('final-score');
 var finalScoreValue = document.getElementById('final-score-value');
 var highScoresDisplay = document.getElementById('high-scores-display');
 var highScoresList = document.getElementById('high-scores-list');
+var countDown = document.getElementById('count-down');
 
 
 var initialsInput = document.getElementById('initials');
@@ -176,7 +177,8 @@ var displayQuestion = function(question) {
 
     // Display the Title Text of the Question
     var questionDiv = document.getElementById('question-div');
-    var questionTitle = document.createElement('h1');
+    var questionTitle = document.createElement('p');
+    questionTitle.classList.add("question-title");
     var questionNumberDisplayText = document.getElementById('question-number');
     // Title--------------
     questionTitle.textContent = question.question;
@@ -233,12 +235,21 @@ var nextQuestion = function() {
 
 var startTimer=function() {
     paused = false;
-    questionTimer = setTimeout( function() {
-            if (!paused) {
-                incorrectAudio.play();
-                nextQuestion();
+    seconds = delay;
+    questionTimer = setInterval( function() {
+        seconds--;
+        
+            if ( seconds < 1 ) {
+                clearInterval(questionTimer);
+                countDown.textContent = delay;
+                if (!paused) {
+                    incorrectAudio.play();
+                    nextQuestion();
+                }
+            } else {
+                countDown.textContent = seconds;
             }
-    } , delay*1000);
+    } , 1000);
 
 }
 

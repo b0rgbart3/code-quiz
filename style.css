@@ -52,7 +52,7 @@ body {
   box-shadow: 0 0 8px gray;
   width: 100%;
   max-width: 740px;
-  margin-top: 40px;
+  margin-top: 80px;
   padding-bottom: 40px;
   position: relative;
   transition: all 2s;
@@ -81,17 +81,16 @@ body {
   left: -4px;
   box-shadow: 0 0 8px #4d649d; }
 
-h1 {
+.question-title {
   font-family: 'Volkhov', serif;
   margin-top: 20px;
   padding-top: 20px;
   font-size: 1.8em;
-  width: 85%;
-  max-width: 500px;
+  max-width: 550px;
   margin: auto;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
   margin-bottom: 20px;
-  letter-spacing: -.03em; }
+  letter-spacing: -.05em; }
 
 .stretch-center {
   margin-left: auto;
@@ -136,6 +135,27 @@ h1 {
 
 button:focus {
   outline: none; }
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  background-color: #aaaaaa;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px;
+  font-weight: 600; }
+
+.count-down {
+  background-color: #569c56;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: white;
+  padding: 14px;
+  position: fixed;
+  top: 0;
+  right: 200px; }
 
 .form-button {
   font-family: 'Inconsolata', monospace;
@@ -214,10 +234,11 @@ button:focus {
   margin: auto;
   padding: 10px;
   display: none;
-  margin-top: 100px;
+  margin-top: 80px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 0 20px gray; }
+  box-shadow: 0 0 20px gray;
+  padding-top: 0; }
 
 .score-title {
   text-align: center;
@@ -228,7 +249,8 @@ button:focus {
   font-size: 2.4em;
   letter-spacing: -.03em;
   padding: 0;
-  font-family: 'Volkhov', serif; }
+  font-family: 'Volkhov', serif;
+  padding-top: 30px; }
 
 input {
   font-size: 2.4em;
@@ -257,7 +279,7 @@ input:active {
   margin: auto;
   padding: 10px;
   display: none;
-  margin-top: 100px;
+  margin-top: 80px;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 0 20px gray; }
@@ -318,19 +340,29 @@ input:active {
   background-color: #c6ffc6; }
 
 @media screen and (min-width: 640px) {
+  .question-title {
+    font-family: 'Volkhov', serif;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: 1.8em;
+    margin: auto;
+    padding-bottom: 0px;
+    margin-bottom: 30px;
+    letter-spacing: -.03em; }
+
   .high-scores-display {
-    padding: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
     width: 50%; }
 
   .final-score {
-    width: 50%;
-    padding: 100px; }
+    width: 80%; }
 
   .question-number {
     position: relative;
     display: inline-block;
     float: left;
-    top: 12px;
+    top: -18px;
     left: 12px;
     max-width: 60px;
     max-height: 80px;
@@ -343,20 +375,7 @@ input:active {
     border-radius: 50%;
     font-weight: 900;
     width: 60px;
-    margin-right: 10px;
-    margin-top: 30px; }
-
-  h1 {
-    margin-top: 20px;
-    padding-top: 20px;
-    font-size: 1.8em;
-    max-width: 600px;
-    margin: auto;
-    padding-bottom: 30px;
-    margin-bottom: 20px;
-    letter-spacing: -.03em;
-    display: inline-block;
-    float: left;
+    margin-right: 20px;
     margin-top: 30px; } }
 
 /*# sourceMappingURL=style.css.map */
